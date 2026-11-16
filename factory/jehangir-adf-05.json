@@ -1,0 +1,15 @@
+{
+	"name": "jehangir-adf-05",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ef4cdd7b-8aca-4f7a-9e10-38efe7160977",
+		"tenantId": "87640220-b4cc-4700-9931-2643ece7a747"
+	}
+}
