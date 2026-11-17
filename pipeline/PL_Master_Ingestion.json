@@ -21,6 +21,8 @@
 			{
 				"name": "Blob Ingestion",
 				"type": "ExecutePipeline",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Database Ingestion",
@@ -44,6 +46,8 @@
 			{
 				"name": "HTTP Ingestion",
 				"type": "ExecutePipeline",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Blob Ingestion",
