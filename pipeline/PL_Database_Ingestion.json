@@ -281,7 +281,7 @@
 											"source": {
 												"type": "AzureSqlSource",
 												"sqlReaderQuery": {
-													"value": "select * from @{item().tablename} where @{item().watermark} > '@{activity('Fetch_logs').output.firstRow.last_fetched_date}'",
+													"value": "select * from @{item().tablename} where @{item().watermark} >= '@{activity('Fetch_logs').output.firstRow.last_fetched_date}'",
 													"type": "Expression"
 												},
 												"queryTimeout": "02:00:00",
