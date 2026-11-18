@@ -14,6 +14,9 @@
 		"ls_AzureSqlDatabase_password": {
 			"value": ""
 		},
+		"ls_AzureDatabricks_accessToken": {
+			"value": ""
+		},
 		"ls_AzureDataLakeStorage_properties_typeProperties_url": {
 			"value": "https://jehangirdatalake05.dfs.core.windows.net/"
 		},
@@ -28,6 +31,9 @@
 		},
 		"ls_HTTP_Connector_properties_typeProperties_url": {
 			"value": "@{linkedService().baseurl}"
+		},
+		"ls_AzureDatabricks_properties_typeProperties_existingClusterId": {
+			"value": "1116-122041-sh946isb"
 		},
 		"containerUri": {
 			"value": ""
