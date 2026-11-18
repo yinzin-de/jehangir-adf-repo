@@ -506,7 +506,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_audit_success]",
+							"storedProcedureName": "[[dbo].[dbws_audit_success]",
 							"storedProcedureParameters": {
 								"file_name": {
 									"value": null,
@@ -557,7 +557,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_audit_failed]",
+							"storedProcedureName": "[[dbo].[dbws_audit_failed]",
 							"storedProcedureParameters": {
 								"error_message": {
 									"value": {
@@ -694,7 +694,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_audit_success]",
+							"storedProcedureName": "[[dbo].[dbws_audit_success]",
 							"storedProcedureParameters": {
 								"file_name": {
 									"value": null,
@@ -745,7 +745,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_audit_failed]",
+							"storedProcedureName": "[[dbo].[dbws_audit_failed]",
 							"storedProcedureParameters": {
 								"error_message": {
 									"value": {
