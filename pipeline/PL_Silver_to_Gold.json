@@ -92,7 +92,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[usp_audit_success]",
+					"storedProcedureName": "[dbo].[dbws_audit_success]",
 					"storedProcedureParameters": {
 						"file_name": {
 							"value": null,
