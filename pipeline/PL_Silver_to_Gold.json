@@ -143,7 +143,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[usp_audit_failed]",
+					"storedProcedureName": "[dbo].[dbws_audit_failed]",
 					"storedProcedureParameters": {
 						"error_message": {
 							"value": {
