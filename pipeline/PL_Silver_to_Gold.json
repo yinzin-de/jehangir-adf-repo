@@ -65,7 +65,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/indikarmohdyasin@gmail.com/jehangir-databricks-repo/Silver_to_Gold"
+					"notebookPath": "/Users/indikarmohdyasin@gmail.com/jehangir-dbws-repo/Silver_to_Gold"
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_AzureDatabricks",
