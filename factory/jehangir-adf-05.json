@@ -1,6 +1,12 @@
 {
 	"name": "jehangir-adf-05",
 	"properties": {
+		"globalParameters": {
+			"email_recipients": {
+				"type": "string",
+				"value": "indikarmohdyasin@gmail.com"
+			}
+		},
 		"trustModeClaimForMi": {
 			"value": "Disabled",
 			"editable": true
