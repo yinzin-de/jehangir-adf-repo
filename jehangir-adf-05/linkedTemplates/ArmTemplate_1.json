@@ -136,7 +136,7 @@
 						}
 					},
 					{
-						"name": "Execute Pipeline1",
+						"name": "Send_Progress_Email",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{

@@ -631,7 +631,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/indikarmohdyasin@gmail.com/jehangir-databricks-repo/Bronze_to_Silver_Updated"
+							"notebookPath": "/Users/indikarmohdyasin@gmail.com/jehangir-dbws-repo/Bronze_to_Silver_Updated"
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_AzureDatabricks",
@@ -2481,7 +2481,7 @@
 						}
 					},
 					{
-						"name": "Execute Pipeline1",
+						"name": "Send_Progress_Email",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -2593,7 +2593,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/indikarmohdyasin@gmail.com/jehangir-databricks-repo/Silver_to_Gold"
+							"notebookPath": "/Users/indikarmohdyasin@gmail.com/jehangir-dbws-repo/Silver_to_Gold"
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_AzureDatabricks",
