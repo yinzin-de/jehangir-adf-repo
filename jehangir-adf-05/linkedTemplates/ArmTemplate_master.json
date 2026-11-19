@@ -15,17 +15,21 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_AzureDataLakeStorage'"
 		},
-		"ls_AzureSqlDatabase_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'ls_AzureSqlDatabase'"
-		},
 		"ls_AzureDatabricks_accessToken": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accessToken' of 'ls_AzureDatabricks'"
 		},
+		"ls_AzureSqlDatabase_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_AzureSqlDatabase'"
+		},
 		"ls_AzureDataLakeStorage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://jehangirdatalake05.dfs.core.windows.net/"
+		},
+		"ls_AzureDatabricks_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1116-122041-sh946isb"
 		},
 		"ls_AzureSqlDatabase_properties_typeProperties_server": {
 			"type": "string",
@@ -42,10 +46,6 @@
 		"ls_HTTP_Connector_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "@{linkedService().baseurl}"
-		},
-		"ls_AzureDatabricks_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "1116-122041-sh946isb"
 		},
 		"containerUri": {
 			"type": "string",
@@ -80,14 +80,17 @@
 					"ls_AzureDataLakeStorage_accountKey": {
 						"value": "[parameters('ls_AzureDataLakeStorage_accountKey')]"
 					},
-					"ls_AzureSqlDatabase_password": {
-						"value": "[parameters('ls_AzureSqlDatabase_password')]"
-					},
 					"ls_AzureDatabricks_accessToken": {
 						"value": "[parameters('ls_AzureDatabricks_accessToken')]"
 					},
+					"ls_AzureSqlDatabase_password": {
+						"value": "[parameters('ls_AzureSqlDatabase_password')]"
+					},
 					"ls_AzureDataLakeStorage_properties_typeProperties_url": {
 						"value": "[parameters('ls_AzureDataLakeStorage_properties_typeProperties_url')]"
+					},
+					"ls_AzureDatabricks_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('ls_AzureDatabricks_properties_typeProperties_existingClusterId')]"
 					},
 					"ls_AzureSqlDatabase_properties_typeProperties_server": {
 						"value": "[parameters('ls_AzureSqlDatabase_properties_typeProperties_server')]"
@@ -100,13 +103,30 @@
 					},
 					"ls_HTTP_Connector_properties_typeProperties_url": {
 						"value": "[parameters('ls_HTTP_Connector_properties_typeProperties_url')]"
-					},
-					"ls_AzureDatabricks_properties_typeProperties_existingClusterId": {
-						"value": "[parameters('ls_AzureDatabricks_properties_typeProperties_existingClusterId')]"
 					}
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "jehangir-adf-05_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'jehangir-adf-05_ArmTemplate_0')]"
+			]
 		}
 	]
 }
