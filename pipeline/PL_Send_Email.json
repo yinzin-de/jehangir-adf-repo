@@ -83,7 +83,7 @@
 				"typeProperties": {
 					"variableName": "email_subject",
 					"value": {
-						"value": "@{pipeline().globalParameters.env} | @{if(greater(activity('Check Failed count').output.firstRow.count,0),'FAILED' ,'SUCCESS')} | JEHANGIR MASTER RUN",
+						"value": "@{pipeline().globalParameters.env} | @{if(greater(activity('Check Failed count').output.firstRow,0),'FAILED' ,'SUCCESS')} | JEHANGIR MASTER RUN",
 						"type": "Expression"
 					}
 				}
