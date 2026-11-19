@@ -162,6 +162,40 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Send Email",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Logic Apps Body",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"url": {
+						"value": "@pipeline().globalParameters.Logic_apps_url",
+						"type": "Expression"
+					},
+					"body": {
+						"value": "@variables('logic apps body')",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
