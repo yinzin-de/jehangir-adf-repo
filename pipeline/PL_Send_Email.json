@@ -1,0 +1,189 @@
+{
+	"name": "PL_Send_Email",
+	"properties": {
+		"activities": [
+			{
+				"name": "Read all Tables Status",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select * from audit_table where pipeline_run_id = '@{pipeline().parameters.adf_run_id}'",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_sourcesqltable",
+						"type": "DatasetReference",
+						"parameters": {
+							"db_name": "auditdatabase",
+							"schema_name": "dbo",
+							"table_name": "audit_table"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Email Header",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "body_header",
+					"value": "Ingestion and Transformation process for Jehangir hospital is completed and below is the detailed table presenting status of each pipeline, "
+				}
+			},
+			{
+				"name": "Email Footer",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "body_footer",
+					"value": "For any support, Reach out to abc@outlook.com."
+				}
+			},
+			{
+				"name": "Email Subject",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Check Failed count",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "email_subject",
+					"value": {
+						"value": "@{pipeline().globalParameters.env} | @{if(greater(activity('Check Failed count').output.firstRow.count,0),'FAILED' ,'SUCCESS')} | JEHANGIR MASTER RUN",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Check Failed count",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select count(*) from audit_table where adf_run_id = @{pipeline().parameters.adf_run_id} and status = != 'SUCCESS'",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_sourcesqltable",
+						"type": "DatasetReference",
+						"parameters": {
+							"db_name": "auditdatabase",
+							"schema_name": "dbo",
+							"table_name": "audit_table"
+						}
+					}
+				}
+			},
+			{
+				"name": "Logic Apps Body",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Read all Tables Status",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Email Subject",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Email Header",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Email Footer",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "logic apps body",
+					"value": {
+						"value": "{\n    \"subject\":\"@{variables('email_subject')}\",\n    \"email_recipients\":\"@{pipeline().globalParameters.email_recipients}\",\n    \"body_header\":\"@{variables('body_header')}\",\n    \"body_footer\":\"@{variables('body_footer')}\",\n    \"status_table\":@{activity('Read all Tables Status').output.value}\n}",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"adf_run_id": {
+				"type": "string",
+				"defaultValue": "8c8009c7-a25a-4e19-abc7-ee9666046f61"
+			}
+		},
+		"variables": {
+			"body_header": {
+				"type": "String"
+			},
+			"body_footer": {
+				"type": "String"
+			},
+			"email_subject": {
+				"type": "String"
+			},
+			"logic apps body": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
